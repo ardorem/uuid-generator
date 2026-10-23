@@ -1,0 +1,85 @@
+* { box-sizing: border-box; }
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  background: #101114;
+  color: #f0f0f5;
+  font-synthesis: none;
+  --muted: #999aa9;
+  --accent: #b5a1ff;
+  --border: #2d2e38;
+}
+
+body { margin: 0; min-width: 280px; padding: 72px 24px 40px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.app { width: 100%; max-width: 720px; margin: 0 auto; }
+.header { margin-bottom: 32px; }
+.eyebrow { display: block; margin-bottom: 12px; color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+.header h1 { margin: 0; font-size: clamp(28px, 5vw, 36px); line-height: 1.25; font-weight: 700; letter-spacing: -1.2px; }
+.header p { margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+h2 { margin: 0; font-size: 14px; line-height: 1.5; font-weight: 600; }
+.controls { display: grid; gap: 24px; padding: 28px; border: 1px solid var(--border); border-radius: 20px; background: #191a20; }
+.controls h2 { margin-bottom: 2px; }
+fieldset { display: grid; grid-template-columns: 100px 1fr; align-items: center; min-width: 0; margin: 0; padding: 0; border: 0; }
+legend { float: left; width: 100px; padding: 0; color: #c1c1ce; font-size: 13px; }
+.option-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border: 1px solid #282932; border-radius: 12px; background: #111216; }
+.radio-option { position: relative; display: flex; min-width: 0; cursor: pointer; user-select: none; }
+.radio-option input, .checkbox-option input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.radio-mark { display: none; }
+.radio-option > span:last-child { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 38px; border: 1px solid transparent; border-radius: 8px; color: var(--muted); font-size: 13px; transition: background-color 140ms, color 140ms; }
+.radio-option:hover > span:last-child { background: #20212a; color: #f0f0f5; }
+.radio-option input:checked ~ span:last-child { border-color: #51456f; background: #332b48; color: #d8cbff; font-weight: 600; }
+.checkbox-option { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; user-select: none; }
+.switch-label { display: grid; gap: 5px; color: #c1c1ce; font-size: 13px; }
+.option-hint { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.switch-control { position: relative; display: inline-flex; flex-shrink: 0; }
+.checkbox-mark { display: block; width: 38px; height: 22px; padding: 3px; border: 1px solid #4a4b58; border-radius: 20px; background: #30313c; transition: background-color 140ms; }
+.checkbox-mark::after { display: block; width: 14px; height: 14px; border-radius: 50%; background: #b8b9c6; content: ""; transition: transform 140ms; }
+.checkbox-option input:checked + .checkbox-mark { border-color: var(--accent); background: var(--accent); }
+.checkbox-option input:checked + .checkbox-mark::after { transform: translateX(16px); background: #211a35; }
+.checkbox-option.is-disabled { cursor: default; }
+.checkbox-option.is-disabled .checkbox-mark { opacity: .4; }
+.radio-option input:focus-visible ~ span:last-child, .checkbox-option input:focus-visible + .checkbox-mark, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.generate-button { display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%; min-height: 48px; margin-top: 2px; border: 1px solid transparent; border-radius: 12px; background: var(--accent); color: #20172f; font-size: 14px; font-weight: 650; transition: background-color 140ms, transform 140ms; }
+.generate-button > span { font-size: 23px; line-height: 1; }
+.generate-button:hover { background: #c5b5ff; }
+.generate-button:active { transform: translateY(1px); }
+.results { margin-top: 32px; }
+.results-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.results-header h2 { display: flex; align-items: center; gap: 9px; }
+.result-count { padding: 2px 7px; border-radius: 6px; background: #26232f; color: var(--accent); font-size: 11px; font-weight: 500; }
+.copy-all-button { min-height: 36px; padding: 0 12px; border: 1px solid var(--border); border-radius: 9px; background: transparent; color: #c1c1ce; font-size: 12px; }
+.result-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.result-item { display: flex; align-items: center; gap: 12px; min-width: 0; min-height: 64px; padding: 12px 14px 12px 18px; border: 1px solid var(--border); border-radius: 12px; background: #191a20; }
+.result-item.is-used { border-color: #655184; background: #201c2b; }
+.result-content { display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 6px 12px; min-width: 0; }
+.used-badge { flex-shrink: 0; padding: 2px 7px; border-radius: 6px; background: #352b48; color: #d8cbff; font-size: 11px; line-height: 1.6; white-space: nowrap; }
+.used-badge[hidden] { display: none; }
+.uuid-value { flex: 1; min-width: 0; overflow-wrap: anywhere; color: #e0dce9; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 14px; line-height: 1.7; font-variant-ligatures: none; }
+.copy-one-button { display: inline-flex; flex: 0 0 36px; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--muted); }
+.copy-one-button:hover, .copy-all-button:hover { border-color: #484451; background: #24232c; color: #e1d5ff; }
+.copy-one-button.is-copied { color: var(--accent); background: #30283f; }
+.copy-one-button svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.status { min-height: 20px; margin: 10px 0 0; color: var(--accent); font-size: 12px; line-height: 1.6; }
+.footnote { margin: 14px 2px 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+@media (max-width: 540px) {
+  body { padding: 36px 16px 24px; }
+  .header { margin-bottom: 24px; }
+  .controls { padding: 22px 18px; gap: 22px; border-radius: 16px; }
+  fieldset { display: block; }
+  legend { float: none; width: auto; margin-bottom: 10px; }
+  .radio-option > span:last-child { min-height: 40px; }
+  .copy-one-button { flex-basis: 44px; width: 44px; height: 44px; }
+  .copy-all-button { min-height: 44px; }
+  .checkbox-option { min-height: 44px; }
+  .result-item { padding: 10px 8px 10px 14px; gap: 8px; }
+  .uuid-value { font-size: 13px; }
+  .result-content { flex-direction: column; align-items: flex-start; }
+  .result-content .uuid-value { width: 100%; }
+  .results { margin-top: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}

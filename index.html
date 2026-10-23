@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <meta name="description" content="간단하고 빠르게 UUID를 생성하고 복사할 수 있는 무료 UUID 생성기입니다.">
+  <title>UUID Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <span class="eyebrow">작은 도구, 빠른 작업</span>
+      <h1>UUID Generator</h1>
+      <p>빠르게 생성하고, 바로 복사하세요.</p>
+    </header>
+
+    <section class="controls" aria-label="UUID 생성 옵션">
+      <h2>생성 옵션</h2>
+      <fieldset>
+        <legend>길이</legend>
+        <div class="option-row">
+          <label class="radio-option">
+            <input type="radio" name="length" value="8">
+            <span class="radio-mark" aria-hidden="true"></span>
+            <span>8자</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="length" value="16">
+            <span class="radio-mark" aria-hidden="true"></span>
+            <span>16자</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="length" value="32" checked>
+            <span class="radio-mark" aria-hidden="true"></span>
+            <span>32자</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <label class="checkbox-option" id="hyphens-option">
+        <span class="switch-label"><span>하이픈 포함</span><span id="hyphens-hint" class="option-hint">32자 선택 시 사용할 수 있어요.</span></span>
+        <span class="switch-control">
+        <input type="checkbox" id="hyphens">
+        <span class="checkbox-mark" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <fieldset>
+        <legend>생성 개수</legend>
+        <div class="option-row">
+          <label class="radio-option">
+            <input type="radio" name="count" value="1" checked>
+            <span class="radio-mark" aria-hidden="true"></span>
+            <span>1개</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="count" value="5">
+            <span class="radio-mark" aria-hidden="true"></span>
+            <span>5개</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="count" value="10">
+            <span class="radio-mark" aria-hidden="true"></span>
+            <span>10개</span>
+          </label>
+        </div>
+      </fieldset>
+      <button id="generate" class="generate-button" type="button"><span aria-hidden="true">↻</span> UUID 생성</button>
+    </section>
+
+    <section class="results" aria-label="UUID 생성 결과">
+      <div class="results-header">
+        <h2>생성 결과 <span id="result-count" class="result-count">0개</span></h2>
+        <button id="copy-all" class="copy-all-button" type="button">전체 복사</button>
+      </div>
+      <ul id="result-list" class="result-list" aria-live="polite"></ul>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+    <p class="footnote">8자·16자는 UUID를 줄인 값입니다. 표준 UUID는 32자에 하이픈을 포함해 사용하세요.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
